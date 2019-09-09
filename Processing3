@@ -1,0 +1,32 @@
+int pacX = 25;
+int pacY = 200;
+
+void setup(){
+  size(1600,800);
+  background(2);
+  textAlign(CENTER);
+  textSize(40);
+}
+
+void draw(){
+  drawBG();
+  pacMan(pacX, pacY, 50, 50);
+  pacX += 10;
+  
+  if(pacX>1600){
+    pacX = 0;
+  }
+}
+
+void pacMan(int x,int y ,int r1, int r2){
+  fill(#F7F743);
+  ellipse(x, y, r1, r2);
+  fill(0);
+  arc(x, y, r1, r2, PI/4, 7*PI/4);
+}
+
+void drawBG(){
+  background(2);
+  fill(#F7F743);
+  text("HI PACMAN", 800, 100);
+}
