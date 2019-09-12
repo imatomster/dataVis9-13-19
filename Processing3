@@ -2,7 +2,7 @@
 int pacX = 25;
 int pacY = 200;
 int counter = 0;
-int [] data = [152, 68, 47, 35]; 
+int [] data = {152, 68, 47, 35};
 
 void setup(){
   size(1200,800);
@@ -62,7 +62,9 @@ void drawMargin(){
   textSize(20);
   fill(#F7F743);
   text("All Types of Games", 20, 300);
-  for(int i = 0; i < 152; 
+  drawGhost(120, 385, #FA2D49);
+  for(int i = 0; i < data[0]; i+=4){
+  }
   
   text("Mobile", 20, 400);
   
@@ -71,3 +73,37 @@ void drawMargin(){
   text("PC", 20, 600);
 }
 
+// Constants for main ghost body
+int HEAD_RADIUS = 35;
+int BODY_WIDTH = HEAD_RADIUS * 2;
+int BODY_HEIGHT = 60;
+int NUM_FEET = 3;
+int FOOT_RADIUS = (BODY_WIDTH) / (NUM_FEET * 2); 
+// Constants for eyes
+int PUPIL_RADIUS = 4;
+int PUPIL_LEFT_OFFSET = 8;
+int PUPIL_RIGHT_OFFSET = 20;
+int EYE_RADIUS = 10;
+int EYE_OFFSET = 14;
+// FUNCTION DRAWING GHOST
+void drawGhost(int centerX, int centerY, color colors){
+    // ADDING HEAD
+    fill(colors);
+    circle(centerX, centerY,HEAD_RADIUS);
+    // ADDING BODY
+    fill(colors);
+    rect(centerX - BODY_WIDTH*0.5, centerY, BODY_HEIGHT, BODY_WIDTH);
+    // ADDING 2 EYES
+    fill(#FFFFFF);
+    circle(centerX - EYE_OFFSET, centerY - EYE_OFFSET*0.5, EYE_RADIUS);
+    circle(centerX + EYE_OFFSET, centerY - EYE_OFFSET*0.5, EYE_RADIUS);
+    // ADDING 2 PUPILS
+    fill(#2FB6DE);
+    circle(centerX - PUPIL_LEFT_OFFSET, centerY - EYE_OFFSET*0.5, PUPIL_RADIUS);
+    circle(centerX + PUPIL_LEFT_OFFSET, centerY - EYE_OFFSET*0.5, PUPIL_RADIUS);
+    // ADDING 3 LEGS
+    fill(colors);
+    circle(centerX - 2*FOOT_RADIUS, centerY + BODY_HEIGHT, FOOT_RADIUS);
+    circle(centerX, centerY + BODY_HEIGHT, FOOT_RADIUS);
+    circle(centerX + 2*FOOT_RADIUS, centerY + BODY_HEIGHT, FOOT_RADIUS);
+}
