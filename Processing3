@@ -3,6 +3,7 @@ int pacX = 25;
 int pacY = 200;
 int counter = 0;
 int [] data = {152, 68, 47, 35};
+int e = 0;
 
 void setup(){
   size(1200,800);
@@ -61,16 +62,34 @@ void drawMargin(){
   textAlign(LEFT);
   textSize(20);
   fill(#F7F743);
-  text("All Types of Games", 20, 300);
-  drawGhost(120, 385, #FA2D49);
-  for(int i = 0; i < data[0]; i+=4){
+  text("All Games: $152 Bil", 20, 300);
+  for(int i = 0; i < data[0]; i+=data[0]/10-2){
+    drawGhost(e+300, 285, #FA2D49);
+    e+=75;
   }
+  e=0;
+  fill(#F7F743);
+  text("Mobile: $68 Bil", 20, 400);
+  for(int i = 0; i < data[1]; i+=data[0]/10){
+    drawGhost(e+300, 385, #FA2D49);
+    e+=75;
+  }
+  e=0;
+  fill(#F7F743);
+  text("Console: $47 Bil", 20, 500);
+  for(int i = 0; i < data[2]; i+=data[0]/10){
+    drawGhost(e+300, 485, #FA2D49);
+    e+=75;
+  }
+  e=0;
+  fill(#F7F743);
+  text("PC: $35 Bil", 20, 600);
+  for(int i = 0; i < data[3]; i+=data[0]/10){
+    drawGhost(e+300, 585, #FA2D49);
+    e+=75;
+  }
+  e=0;
   
-  text("Mobile", 20, 400);
-  
-  text("Console", 20, 500);
-  
-  text("PC", 20, 600);
 }
 
 // Constants for main ghost body
@@ -87,23 +106,24 @@ int EYE_RADIUS = 10;
 int EYE_OFFSET = 14;
 // FUNCTION DRAWING GHOST
 void drawGhost(int centerX, int centerY, color colors){
+    noStroke();
     // ADDING HEAD
     fill(colors);
-    circle(centerX, centerY,HEAD_RADIUS);
-    // ADDING BODY
-    fill(colors);
-    rect(centerX - BODY_WIDTH*0.5, centerY, BODY_HEIGHT, BODY_WIDTH);
-    // ADDING 2 EYES
-    fill(#FFFFFF);
-    circle(centerX - EYE_OFFSET, centerY - EYE_OFFSET*0.5, EYE_RADIUS);
-    circle(centerX + EYE_OFFSET, centerY - EYE_OFFSET*0.5, EYE_RADIUS);
-    // ADDING 2 PUPILS
-    fill(#2FB6DE);
-    circle(centerX - PUPIL_LEFT_OFFSET, centerY - EYE_OFFSET*0.5, PUPIL_RADIUS);
-    circle(centerX + PUPIL_LEFT_OFFSET, centerY - EYE_OFFSET*0.5, PUPIL_RADIUS);
+    circle(centerX, centerY, HEAD_RADIUS);
     // ADDING 3 LEGS
     fill(colors);
-    circle(centerX - 2*FOOT_RADIUS, centerY + BODY_HEIGHT, FOOT_RADIUS);
-    circle(centerX, centerY + BODY_HEIGHT, FOOT_RADIUS);
-    circle(centerX + 2*FOOT_RADIUS, centerY + BODY_HEIGHT, FOOT_RADIUS);
+    circle(centerX - 35/2 + FOOT_RADIUS/2, centerY + 30, FOOT_RADIUS);
+    circle(centerX, centerY + 30, FOOT_RADIUS);
+    circle(centerX + 35/2 - FOOT_RADIUS/2, centerY + 30, FOOT_RADIUS);
+    // ADDING BODY
+    fill(colors);
+    rect(centerX - 35/2, centerY, 35, 30);
+    // ADDING 2 EYES
+    fill(#FFFFFF);
+    circle(centerX - EYE_OFFSET/2, centerY - EYE_OFFSET*0.5, EYE_RADIUS);
+    circle(centerX + EYE_OFFSET/2, centerY - EYE_OFFSET*0.5, EYE_RADIUS);
+    // ADDING 2 PUPILS
+    fill(#2FB6DE);
+    circle(centerX - PUPIL_LEFT_OFFSET/2, centerY - EYE_OFFSET*0.5, PUPIL_RADIUS);
+    circle(centerX + 5*PUPIL_LEFT_OFFSET/4, centerY - EYE_OFFSET*0.5, PUPIL_RADIUS);
 }
