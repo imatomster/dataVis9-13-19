@@ -4,6 +4,7 @@ int pacY = 200;
 int counter = 0;
 int [] data = {152, 68, 47, 35};
 int e = 0;
+boolean back = false;
 
 void setup(){
   size(1200,800);
@@ -13,23 +14,50 @@ void setup(){
 }
 
 void draw(){
-  //CHOMP
-  if (counter < 10){
-    drawBG();
-    pacMan(pacX, pacY, 50, 50);
-  }else if (counter < 20){
-    drawBG();
-    openMouth(pacX, pacY, 50, 50);
-  }else{
-    counter = 0;
-  }
-  counter++;
-  
   //MOVE
-  pacX+=5;
-  if(pacX>1200){
-    pacX = 0;
+  if(back == false && pacX<1300){
+    pacY = 200;
+    pacX+=5;
+    
+    //CHOMPR
+    if (counter < 10){
+      drawBG();
+      pacMan(pacX, pacY, 50, 50);
+    }else if (counter < 20){
+      drawBG();
+      openRMouth(pacX, pacY, 50, 50);
+    }else{
+      counter = 0;
+    }
+    counter++;
+    
+  }else{
+    back = true;
   }
+  
+  if(back == true && pacX>-100){
+    pacY = 700;
+    pacX -= 5;
+    
+    
+    //CHOMPL
+    if (counter < 10){
+      drawBG();
+      pacMan(pacX, pacY, 50, 50);
+    }else if (counter < 20){
+      drawBG();
+      pacMan(pacX, pacY, 50, 50);
+      openLMouth(pacX, pacY, 50, 50);
+    }else{
+      counter = 0;
+    }
+    counter++;
+    
+    
+  }else {
+    back = false;
+  }
+  
   
 }
 
@@ -38,9 +66,14 @@ void pacMan(int x,int y ,int r1, int r2){
   ellipse(x, y, r1, r2);
 }
 
-void openMouth(int x, int y, int r1, int r2){
+void openRMouth(int x, int y, int r1, int r2){
   fill(#F7F743);
   arc(x, y, r1, r2, PI/4, 7*PI/4);
+}
+
+void openLMouth(int x, int y, int r1, int r2){
+  fill(0);
+  arc(x, y, r1, r2, 3*PI/4, 5*PI/4);
 }
 
 void drawBG(){
@@ -71,21 +104,21 @@ void drawMargin(){
   fill(#F7F743);
   text("Mobile: $68 Bil", 20, 400);
   for(int i = 0; i < data[1]; i+=data[0]/10){
-    drawGhost(e+300, 385, #FA2D49);
+    drawGhost(e+300, 385, #2BDE9D);
     e+=75;
   }
   e=0;
   fill(#F7F743);
   text("Console: $47 Bil", 20, 500);
   for(int i = 0; i < data[2]; i+=data[0]/10){
-    drawGhost(e+300, 485, #FA2D49);
+    drawGhost(e+300, 485, #25C1C0);
     e+=75;
   }
   e=0;
   fill(#F7F743);
   text("PC: $35 Bil", 20, 600);
   for(int i = 0; i < data[3]; i+=data[0]/10){
-    drawGhost(e+300, 585, #FA2D49);
+    drawGhost(e+300, 585, #82C125);
     e+=75;
   }
   e=0;
